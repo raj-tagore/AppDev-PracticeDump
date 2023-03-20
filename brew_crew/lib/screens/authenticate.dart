@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:brew_crew/screens/register.dart';
 import 'package:brew_crew/screens/signin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({super.key});
@@ -11,10 +12,21 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+
+  bool showSignIn = true;
+  void toggleView() {
+    setState(() {
+      showSignIn = !showSignIn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: SignIn(),
-    );
+    if (showSignIn) {
+      // we are passing a function but it doesnt have the "()" around it
+      return SignIn(toggleView: toggleView);
+    } else {
+      return Register(toggleView: toggleView);
+    }
   }
-}
+} 
